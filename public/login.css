@@ -1,0 +1,319 @@
+@import"https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css";
+body {
+  padding: 0px !important;
+  margin: 0px !important;
+    height: 100% !important;
+  font-family: 'Nunito', sans-serif !important;
+  font-size: 1.5em !important;
+}
+
+#bg { 
+  /* The image used */
+  background-image:  url("resources/img/bg_login.jpg");
+
+  /* Full height */
+  height: 100%; 
+
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+input, button, select,a {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 1.2em !important;
+}
+option{
+  font-size: 1em !important;
+  font-family: 'Nunito', sans-serif;;
+}
+#login_div{
+  position: absolute;
+  top: 50% ;
+  left: 35% ;
+  transform: translate(-50%, -50%);
+}
+.main-div {
+  width: 50%;
+  margin: 0 auto;
+  padding: 10%;
+  display: none;
+}
+@media only screen and (min-width: 1200px) {
+  #register_div .col2{
+    padding: 6% !important;
+  }
+  #register_div2 .col2{
+    padding: 6% !important;
+  }
+  .paddingleft0{
+    padding-left: 0 !important;
+  }
+  .paddingright0{
+    padding-right: 0 !important;
+  }
+}
+.paddingright0{
+  padding-right: 0 !important;
+}
+@media only screen and (max-width: 1200px) {
+  .main-register-div {
+    /* width: 20% !important; */
+    margin:  auto;
+    padding: 0% !important;
+    display: none;
+  }
+  .main-div {
+    width: 50% !important;
+    margin: 0 auto;
+    padding: 0% !important;
+    display: none;
+    
+  }
+  .main-div input{
+    padding: 4% !important
+  }
+  
+
+}
+
+.main-register-div button{
+  padding: 1.5% !important;
+}
+
+.main-register-div {
+  width: 70%;
+  margin:  auto;
+  padding: 10%;
+  display: none;
+}
+#register_div{
+  position: absolute;
+  top: 45%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+}
+#register_div2{
+  position: absolute;
+  top: 45%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+}
+.inlineinput div {
+  display: inline;
+  
+}
+.main-div input, select {
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #fff;
+  opacity: 0.5;
+  padding: 3%;
+  font-size: 0.7em;
+  outline: none;
+  color: #e11466;
+  width: 100%;
+  margin-bottom: 6%;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+}
+.main-div select {
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #fff;
+  padding: 3%;
+  color: #79777b;
+  font-size: 0.7em;
+  outline: none;
+  width: 100%;
+  margin-bottom: 6%;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  font-weight: bold;
+  -moz-transition: 0.3s;
+}
+.main-div option {
+  background: #ccc;
+  font-size: 1.1em;
+  color: #79777b;
+}
+
+.main-div input:focus {
+  border: 2px solid #e11466;
+}
+
+#tutorial button, .main-div button, .loggedin-div button {
+  background: #2e509f;
+  color: #fff;
+  border: 1px solid #2e509f;
+  border-radius: 5px;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  padding-left: 0%;
+  padding-right: 0%;
+  font-size: 0.7em;
+  display: block;
+  width: 100%;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+}
+
+.main-div a {
+  color: #2e509f;
+  font-size: 0.8em;
+  text-align: center;
+  display: block;
+  font-weight: bold;
+  width: 100%;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+}
+
+.main-div a:hover {
+  color: #e11466;
+}
+
+.main-div #butt:hover, .loggedin-div #butt:hover {
+  background: #fff;
+  color: #2e509f;
+  border: 1px solid #fff;
+  cursor: pointer;
+  text-align: center;
+}
+#MyLeedrLogo{
+  display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    padding-bottom: 8%
+}
+
+#MyLeedrLogo2{
+  display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    padding-bottom: 5%;
+    padding-top:3%
+}
+
+/* Popup container - can be anything you want */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+#terms {
+  /* just for demo */
+  text-align: center;
+  font-weight: bold !important;
+}    
+.terms {
+  /* just for demo */
+  text-align: center;
+  font-weight: bold !important;
+}  
+
+.carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 90%;
+      height: 90%;
+      margin: auto;
+  }
+  
+.textCar{
+  text-align: center;
+  /* text-shadow: .5px 0 0 #000000, -.5px 0 0 #000000, 0 .5px 0 #000000, 0 -.5px 0 #000000, 1px 1px #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000; */
+}
+.item{
+  background: #fff
+}
+#myCarousel{
+  position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: #fff;
+    z-index: 10;
+}
+#btnCar{
+  font-size: 2em !important;
+  padding: 1% !important
+}
+
+@media only screen and (min-width: 1630px) {
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 50%;
+      height: 50%;
+      margin: auto;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width:65%;
+      height: 65%;
+      margin: auto;
+  }
+}

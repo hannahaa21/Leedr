@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/ico" sizes="16x16" href="../resources/icon/leedrIcon.ico">
+    <title>MyLeedr - User app</title>
+    <!-- Custom CSS -->
+    <link href="../main/main.css" rel="stylesheet">
+    <link href="../questionsFinancial/questionsFinancial.css" rel="stylesheet">
+    <link href="../questionsFinancial/loadingScreenFinancial.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="../dictionary.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCuAtCQ8M45Jk23TKU3sBxiwXGUZT2-1kg",
+            authDomain: "leedr-devapp.firebaseapp.com",
+            databaseURL: "https://leedr-devapp.firebaseio.com",
+            projectId: "leedr-devapp",
+            storageBucket: "leedr-devapp.appspot.com",
+            messagingSenderId: "631376229434"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+
+</head>
+
+<body onload="checkLoggedin()">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div id="questionsPre">
+        <div class="preloader">
+            <div class="lds-ripple">
+                <div class="lds-pos"></div>
+                <div class="lds-pos"></div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- Main wrapper - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <div id="main-wrapper">
+            <!-- ============================================================== -->
+            <!-- Topbar header - style you can find in pages.scss -->
+            <!-- ============================================================== -->
+            <header class="topbar" data-navbarbg="skin5" style="background-color: black">
+                <div class="container-fluid">
+                    <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                        <div class="navbar-header" data-logobg="skin5">
+
+                            <!-- ============================================================== -->
+                            <!-- Logo -->
+                            <!-- ============================================================== -->
+                            <a class="navbar-brand">
+                                <!-- Logo icon -->
+                                <b class="logo-icon p-l-10">
+                                    <a href="../main/main.html">
+                                        <img src="../resources/img/my_leeder_white.png" onclick="" class="light-logo"
+                                            width="100" height="40" />
+                                    </a>
+                                </b>
+                            </a>
+                            <!-- ============================================================== -->
+                            <!-- End Logo -->
+                            <!-- ============================================================== -->
+
+                        </div>
+                        <!-- ============================================================== -->
+                        <!-- End Logo -->
+                        <!-- ============================================================== -->
+                        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="navbarSupportedContent"
+                            style="float: right">
+                            <!-- ============================================================== -->
+                            <!-- User profile and search -->
+                            <!-- ============================================================== -->
+                            <li class="nav-item dropdown ml-auto">
+                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href=""
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../resources/icon/PERFIL.svg"
+                                        alt="user" class="rounded-circle" width="31"></a>
+                                <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                                    <a class="trn dropdown-item" onclick="logout()"><i class="trn fa fa-power-off m-r-5 m-l-5"></i>Logout</a>
+                                    <a class="trn dropdown-item" href="#" role="button" id="dropdownMenuLink"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&ensp;
+                                        Language</a>
+
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" onclick="translateText('en')" href="#">English</a>
+                                        <a class="dropdown-item" onclick="translateText('es')" href="#">Español</a>
+                                    </div>
+
+                                </div>
+                            </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div class="container-fluid">
+            </header>
+            <!-- ============================================================== -->
+            <!-- End Topbar header -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Page wrapper  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <div class="col-lg-2 arrows">
+                    <a class="arrow arrow-left" title="Previous" onclick="previousQuestion()"></a>
+                </div>
+                <div class="col-lg-8" id="questions">
+                    <div class="control-group2" style="display:none;" id="orderQuest">
+                        <h4 id="orderQuestionsInstructions" class="trn">Por favor ordene de 1 a 5 las siguientes
+                            opciones
+                            por importancia, siendo 1 la mas importante</h4>
+                        <h1 id="questionOrder" class="trn"></h1>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <input class="order" min="1" max="8" type="number" id="q1order">
+                            </div>
+                            <div class="col-lg-10">
+                                <h3 id="q1orderText" class="trn"></h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <input class="order" min="1" max="8" type="number" id="q2order">
+                            </div>
+                            <div class="col-lg-10">
+                                <h3 id="q2orderText" class="trn"></h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <input class="order" min="1" max="8" type="number" id="q3order">
+                            </div>
+                            <div class="col-lg-10">
+                                <h3 id="q3orderText" class="trn"></h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <input class="order" min="1" max="8" type="number" id="q4order">
+                            </div>
+                            <div class="col-lg-10">
+                                <h3 id="q4orderText" class="trn"></h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2" id="q5div">
+                                <input class="order" min="1" max="8" type="number" id="q5order">
+                            </div>
+                            <div class="col-lg-10" id="q5div2">
+                                <h3 id="q5orderText" class="trn"></h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2" id="q5div">
+                                <input class="order" min="1" max="8" type="number" id="q6order">
+                            </div>
+                            <div class="col-lg-10" id="q5div2">
+                                <h3 id="q6orderText" class="trn"></h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2" id="q6div">
+                                <input class="order" min="1" max="8" type="number" id="q7order">
+                            </div>
+                            <div class="col-lg-10" id="q6div2">
+                                <h3 id="q7orderText" class="trn"></h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2" id="q7div">
+                                <input class="order" min="1" max="8" type="number" id="q8order">
+                            </div>
+                            <div class="col-lg-10" id="q7div2">
+                                <h3 id="q8orderText" class="trn"></h3>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <button onclick="nextQuestion()" id="nextBut" class="trn">Siguiente</button>
+                    </div>
+                    <div class="control-group trn" style="display:none;" id="radioButtonsQuest">
+                        <h1 id="questionMultiple"></h1>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-11">
+                                <label id="checkQ1" class="textQuestion trn control control--radio "></label>
+                            </div>
+                            <div class="col-lg-1">
+                                <input type="radio" class="CheckBoxes control control--radio control__indicator " name="radio"
+                                    value="1" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-11">
+                                <label id="checkQ2" class="textQuestion trn control control--radio"></label>
+                            </div>
+                            <div class="col-lg-1">
+                                <input type="radio" class="CheckBoxes control control--radio control__indicator " name="radio"
+                                    value="2" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-11">
+                                <label id="checkQ3" class="textQuestion trn control control--radio"></label>
+                            </div>
+                            <div class="col-lg-1">
+                                <input type="radio" class="CheckBoxes control control--radio control__indicator " name="radio"
+                                    value="3" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-11">
+                                <label id="checkQ4" class="textQuestion trn control control--radio"></label>
+                            </div>
+                            <div class="col-lg-1">
+                                <input type="radio" class="CheckBoxes control control--radio control__indicator " name="radio"
+                                    value="4" />
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-lg-11" id="rc5">
+                                <label id="checkQ5" class="textQuestion trn control control--radio"></label>
+                            </div>
+                            <div class="col-lg-1" id="rc5A">
+                                <input type="radio" class="CheckBoxes control control--radio control__indicator " name="radio"
+                                    value="5" />
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-lg-11" id="rc6">
+                                <label id="checkQ6" class="textQuestion trn control control--radio"></label>
+                            </div>
+                            <div class="col-lg-1" id="rc6A">
+                                <input type="radio" class="CheckBoxes control control--radio control__indicator " name="radio"
+                                    value="6" />
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-lg-11" id="rc7">
+                                <label id="checkQ7" class="textQuestion trn control control--radio"></label>
+                            </div>
+                            <div class="col-lg-1" id="rc7A">
+                                <input type="radio" class="CheckBoxes control control--radio control__indicator " name="radio"
+                                    value="7" />
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-lg-11" id="rc8">
+                                <label id="checkQ8" class="textQuestion trn control control--radio"></label>
+                            </div>
+                            <div class="col-lg-1" id="rc8A">
+                                <input type="radio" class="CheckBoxes control control--radio control__indicator " name="radio"
+                                    value="8" />
+                            </div>
+                        </div>
+                        <br>
+                        <button onclick="nextQuestion()" id="nextBut2" class="trn">Siguiente</button>
+                    </div>
+
+                </div>
+                <div class="col-lg-2 arrows">
+                    <a class="arrow arrow-right" title="Next" onclick="nextQuestion()"></a>
+                </div>
+            </div>
+            <div class="row" id="percentageDiv">
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-6">
+    
+                        <h3 class="text-center" id="preguntaActual"></h3>
+                        <div class="progress" id="percentageQuestions">
+                            <div class="progress-bar" id="progressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3"></div>
+                </div>
+            <!-- ============================================================== -->
+            <!-- End Page wrapper  -->
+            <!-- ============================================================== -->
+        </div>
+    </div>
+    <div id="questionsPos">
+        <div id="page">
+            <div id="phrase_box">
+                <svg width="100%" height="100%">
+                    <defs>
+                        <!--<style type="text/css">
+                          @font-face {
+                            font-family: "Proxima";
+                            src: url('');
+                          }
+                        </style>-->
+                        <mask id="mask" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse">
+                            <linearGradient id="linearGradient" gradientUnits="objectBoundingBox" x2="0" y2="1">
+                                <stop stop-color="white" stop-opacity="0" offset="0%" />
+                                <stop stop-color="white" stop-opacity="1" offset="30%" />
+                                <stop stop-color="white" stop-opacity="1" offset="70%" />
+                                <stop stop-color="white" stop-opacity="0" offset="100%" />
+                            </linearGradient>
+                            <rect width="100%" height="100%" fill="url(#linearGradient)" />
+                        </mask>
+                    </defs>
+                    <g width="100%" height="100%" style="mask: url(#mask);">
+                        <g id="phrases"></g>
+                    </g>
+                </svg>
+            </div>
+            <div id="footer">
+                <div id="logo"></div>Leedr
+            </div>
+        </div>
+    </div>
+    <script src="../main/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../main/dist/js/jquery.ui.touch-punch-improved.js"></script>
+    <script src="../main/dist/js/jquery-ui.min.js"></script>
+    <script src="../main/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="../main/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../main/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="../main/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="../main/assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="../main/dist/js/waves.js"></script>
+    <!--Custom JavaScript -->
+    <script src="../main/dist/js/custom.min.js"></script>
+    <!-- this page js -->
+    <script src="../main/assets/libs/moment/min/moment.min.js"></script>
+    <script src="../main/assets/libs/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script src="../main/dist/js/pages/calendar/cal-init.js"></script>
+
+    <script src="../jquery.translate.js"></script>
+    <script type="text/javascript" src="../questionsFinancial/questionsFinancial.js" charset="utf-8"></script>
+    <script src="../dictionary.js"></script>
+    <script>
+        window.onload = function () {
+            document.getElementById("questionsPre").style.display="block";
+            document.getElementById("questionsPos").style.display="none";
+            setFirstQuestion();
+        };
+        var translator = $('body').translate({
+            lang: "es",
+            t: dict
+        });
+        $(document).ready(function () {
+            $('.dropdown-submenu a.test').on("click", function (e) {
+                $(this).next('ul').toggle();
+                e.stopPropagation();
+                e.preventDefault();
+            });
+        });
+    </script>
+</body>
+
+</html>

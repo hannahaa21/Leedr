@@ -1,0 +1,100 @@
+body {
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 26px;
+  background-color: #F6F6F6;
+    color: #818181; /* grey */
+    font-weight: 400;
+  
+  margin-left: 20%;
+  
+  margin-right: 20%; 
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, a, h1, h2, h3, h4, h5, h6, p a {
+    color: #303030;
+}
+.h1, h1 {
+    font-size: 30px;
+    line-height: 1.25em;
+}
+.h2, h2{
+  font-size: 24px;
+}
+.h3, h3 {
+    font-size: 17px;
+}
+h1, .h1, .title h1, h2, .h2, h3, .h3 {
+    font-family: 'Roboto', sans-serif;
+}
+a:hover, p a:hover {
+    color: #1abc9c;
+    text-decoration: none;
+}
+
+.drop_down .wide .second .inner>ul>li>a, .h2, .h3, .h5, .h6, h2, h3, h5, h6, nav.main_menu>ul>li>a {
+    text-transform: uppercase;
+}
+.h2, .h3, h2, h3 {
+    font-weight: 600;
+  letter-spacing: 1px;
+}
+
+p{
+      margin-bottom: 0;
+      text-align:justify;
+}
+
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 10%;
+}
+
+
+/* code for arrow, page-up*/
+#return-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    /* I can add here some background-color */
+    border: 1px solid white;
+
+    width: 50px;
+    height: 50px;
+    display: block;
+    text-decoration: none;
+    -webkit-border-radius: 35px;
+    -moz-border-radius: 35px;
+    border-radius: 35px;
+    display: none;
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+#return-to-top i { /* inside arrow */
+    color: #fff;
+    margin: 0;
+    position: relative;
+    left: 16px;
+    top: 13px;
+    font-size: 19px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+#return-to-top:hover {
+    background:  white /*rgba(0, 0, 0, 0.9)*/;
+}
+#return-to-top:hover i { /* inside arrow */
+    color: rgb(95, 95, 95); /* grey */
+    top: 5px;
+}
+
+/* end of code for arrow, page-up*/

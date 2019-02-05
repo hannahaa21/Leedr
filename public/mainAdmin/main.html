@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/ico" sizes="16x16" href="../resources/icon/leedrIcon.ico">
+    <title>MyLeedr - User app</title>
+    <!-- Custom CSS -->
+    <link href="../mainAdmin/main.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="../dictionary.js"></script>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script src="../main/amcharts/amcharts.js" type="text/javascript"></script>
+    <script src="../main/amcharts/radar.js" type="text/javascript"></script>
+    <script src="../main/amcharts/serial.js" type="text/javascript"></script>
+    <script src="../main/amcharts/gauge.js" type="text/javascript"></script>
+    <script src="../main/amcharts/pie.js" type="text/javascript"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCuAtCQ8M45Jk23TKU3sBxiwXGUZT2-1kg",
+            authDomain: "leedr-devapp.firebaseapp.com",
+            databaseURL: "https://leedr-devapp.firebaseio.com",
+            projectId: "leedr-devapp",
+            storageBucket: "leedr-devapp.appspot.com",
+            messagingSenderId: "631376229434"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+</head>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div id="coolLoading">
+        <div class="loading">
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar" data-navbarbg="skin5" style="background-color: black">
+            <div class="container-fluid">
+                <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                    <div class="navbar-header" data-logobg="skin5">
+
+                        <!-- ============================================================== -->
+                        <!-- Logo -->
+                        <!-- ============================================================== -->
+                        <a class="navbar-brand">
+                            <!-- Logo icon -->
+                            <b class="logo-icon p-l-10">
+                                <a href="../main/main.html">
+                                    <img src="../resources/img/my_leeder_white.png" onclick="" class="light-logo" width="100"
+                                        height="40" />
+                                </a>
+                            </b>
+                        </a>
+                        <!-- ============================================================== -->
+                        <!-- End Logo -->
+                        <!-- ============================================================== -->
+
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- End Logo -->
+                    <!-- ============================================================== -->
+                    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="navbarSupportedContent"
+                        style="float: right">
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown ml-auto">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href=""
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../resources/icon/PERFIL.svg"
+                                    alt="user" class="rounded-circle" width="31"></a>
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                                <a class="trn dropdown-item" onclick="logout()" id="logoutNav"><i class="trn fa fa-power-off m-r-5 m-l-5"></i>Logout</a>
+                                <a class="trn dropdown-item" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">Language</a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" onclick="translateText('en')" href="#">English</a>
+                                    <a class="dropdown-item" onclick="translateText('es')" href="#">Español</a>
+                                </div>
+
+                            </div>
+                        </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-md-5 col-lg-4">
+                        <div class="card card-hover">
+                            <div class="box bg-cyan text-center" onclick="showLeader()">
+                                <img src="/resources/img/131018_LIDERAZGO.png" alt="leedership" width="10%">
+                                <br>
+                                <br>
+                                <h6 class="trn text-white">Leadership</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-5 col-lg-4">
+                        <div class="card card-hover">
+                            <div class="box bg-dark text-center" onclick="showeq()">
+                                <img src="/resources/img/131018_INTELIGENCIA_EMOCIONAL.png" alt="eq" width="10%">
+                                <br>
+                                <br>
+                                <h6 class="text-white">E.Q</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-lg-4">
+                        <div class="card card-hover">
+                            <div class="box bg-success text-center" onclick="showJobFitness()">
+                                <img src="/resources/img/131018_COCIENTE_DE_INNOVACIÓN.png" alt="eq" width="10%">
+                                <br>
+                                <br>
+                                <h6 class="trn text-white">JobFitness</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-md-5 col-lg-4">
+                        <div class="card card-hover">
+                            <div class="box bg-warning text-center" onclick="showiq()">
+                                <img src="/resources/img/131018_COCIENTE_DE_INNOVACIÓN.png" alt="iq" width="15%">
+                                <br>
+                                <br>
+                                <h6 class="text-white">I.Q</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-5 col-lg-4">
+                        <div class="card card-hover">
+                            <div class="box bg-danger text-center" onclick="showResolve()">
+                                <img src="/resources/img/131018_DETERMINACIÓN.png" alt="grit" width="15%">
+                                <br>
+                                <br>
+                                <h6 class="trn text-white">Resolve</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-5 col-lg-4">
+                        <div class="card card-hover">
+                            <div class="box bg-cyan text-center" onclick="showWear()">
+                                <img src="/resources/img/131018_FINANCIERO.png" alt="finantial" width="15%">
+                                <br>
+                                <br>
+                                <h6 class="trn text-white">Wear</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div id="container">
+
+                            <ul id="tabs">
+                                <li id="people" class="trn active">Personas</li>
+                                <li id="groupsTab" class="trn">Grupos</li>
+                            </ul>
+
+                            <div id="card">
+                                <input id="search" type="text" data-translate="Search" placeholder="Search">
+
+                                <div id="main" class="scrollable">
+                                    <ul id="users"></ul>
+                                    <ul id="groups"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 nobg">
+                        <div class="column" id="leaderbox">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h1 class="text text-center trn">Leadership</h1>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <h4 class="m-b-15 d-block trn justifyText">TextoLeadership</h4>
+                                            <h2 class="trn chartTittle">DimensionsLeadership</h2>
+                                            <div class="row">
+                                                <div id="chartSpiderLeadership"></div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                    <div class="row">
+
+                                        <div class="col-lg-12">
+                                            <h2 class="trn chartTittle">GroupLeadership</h2>
+                                            <br>
+                                            <div class="row">
+                                                <div id="chartBarLeadership"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column" id="eqbox">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h1 class="text text-center trn">Inteligencia Emocional</h1>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                        <h4 class="m-b-15 d-block trn justifyText">TextoEQ</h4>
+                                                    <h2 class="trn chartTittle">DimensionsEQ</h2>
+                                                    <div class="row">
+                                                        <div id="chartClusterEQ"></div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <h2 class="trn chartTittle">GroupEQ</h2>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div id="chartBarEQ"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column" id="iqbox">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h1 class="text text-center trn">Coeficiente de Innovación</h1>
+                                    </div>
+                                    <div class="row">
+                                            <h4 class="m-b-15 d-block trn justifyText">TextoIQ</h4><br>
+                                           
+                                        <div id="statsTestIQ" class="col-lg-12">
+                                            <div class="row">
+                                                    <br>
+                                                    <table class="table text-center">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="trn" scope="col"></th>
+                                                                <th colspan="2" scope="col"><h3 id="userSelectedIQ" ><b class="trn text-center">Usergroup</b></h3></th>
+                                                                <th colspan ="2" scope="col"><h3 class="trn text-center"><b>General</b></h3></th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                        <td class="trn" scope="col"></td>
+                                                                        <td scope="col"><h4 class="trn">Lo lograste</h4></td>
+                                                                        <td scope="col"><h4 class="trn">En camino</h4></td>
+                                                                        <td scope="col"><h4 class="trn">Lo lograste</h4></td>   
+                                                                        <td scope="col"><h4 class="trn">En camino</h4></td>
+                                                                        
+        
+                                                            </tr>
+                                                            <tr>
+                                                                <td><h4 class="trn">Iq1has</h4></td>
+                                                                <td><span id="Iq1Has"></span></td>
+                                                                <td><span id="Iq1Hasnt"></span></td>
+                                                                <td><span id="Iq1HasG"></span></td>
+                                                                <td><span id="Iq1HasntG"></span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                    <td><h4 class="trn">Iq2has</h4></td>
+                                                                    <td><span id="Iq2Has"></span></td>
+                                                                <td><span id="Iq2Hasnt"></span></td>
+                                                                <td><span id="Iq2HasG"></span></td>
+                                                                <td><span id="Iq2HasntG"></span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                    <td><h4 class="trn">Iq3has</h4></td>
+                                                                    <td><span id="Iq3Has"></span></td>
+                                                                <td><span id="Iq3Hasnt"></span></td>
+                                                                <td><span id="Iq3HasG"></span></td>
+                                                                <td><span id="Iq3HasntG"></span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                    <td><h4 class="trn">Iq4has</h4></td>
+                                                                    <td><span id="Iq4Has"></span></td>
+                                                                <td><span id="Iq4Hasnt"></span></td>
+                                                                <td><span id="Iq4HasG"></span></td>
+                                                                <td><span id="Iq4HasntG"></span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                    <td><h4 class="trn">Iq5has</h4></td>
+                                                                    <td><span id="Iq5Has"></span></td>
+                                                                <td><span id="Iq5Hasnt"></span></td>
+                                                                <td><span id="Iq5HasG"></span></td>
+                                                                <td><span id="Iq5HasntG"></span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                    <td><h4 class="trn">Iq6has</h4></td>
+                                                                    <td><span id="Iq6Has"></span></td>
+                                                                <td><span id="Iq6Hasnt"></span></td>
+                                                                <td><span id="Iq6HasG"></span></td>
+                                                                <td><span id="Iq6HasntG"></span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                    <td><h4 class="trn">Iq7has</h4></td>
+                                                                    <td><span id="Iq7Has"></span></td>
+                                                                <td><span id="Iq7Hasnt"></span></td>
+                                                                <td><span id="Iq7HasG"></span></td>
+                                                                <td><span id="Iq7HasntG"></span></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                
+                                            </div>
+                                            <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <h2 class="trn chartTittle">problemSolving</h2><br>
+                                                        <h4 id="problemSolvingIQ"></h4>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="column" id="jobbox">
+                                <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h1 class="text text-center trn">JobFitness</h1>
+                                            </div>
+                                            <div class="col-lg-1">
+                                            </div>
+                                            <div id="infoTestJob">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div id="chartJob"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                        <div class="col-lg-12">
+                                                                <div class="wrapperPer">
+                                                                        <h2 class="text-center trn">progreso</h2><br>
+                                                                        <h2 class="text-center trn" id="progressUser"></h2><br>
+                                                                        <div class="green">
+                            
+                                                                            <div class="progress">
+                                                                                <div class="inner">
+                                                                                    <div class="percent"><span>67</span>%</div>
+                                                                                    <div class="water"></div>
+                                                                                    <div class="glare"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                <br><br>
+                                                <div class="row" id="competenciesTopBot3">
+                                                        <div class="col-lg-6">
+                                                            <h2 class="trn chartTittle">CompetencesTop</h2><br>
+                                                            <h4 class="redText text-center" id="competencesTopJobFitness"></h4>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                                <h2 class="trn chartTittle">CompetencesBot</h2><br>
+                                                                <h4 class="redText text-center" id="competencesBotJobFitness"></h4>
+                                                            </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="main-div col-lg-12">
+                                                                <br><br><br>
+                                                            <button id="btnCompetencies" onclick="showCompetencies()" class="trn">setupCompetencies</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" id="competencies">
+                                                            <div class="col-lg-12">
+                                                                <br>
+                                                                <table class="table text-center">
+                                                                    <thead>
+                                                                        <tr>
+                                                                                <th scope="col">
+                                                                                        <h3><b class="trn text-center">Competences</b></h3>
+                                                                                    </th>
+                                                                                <th scope="col">
+                                                                                        <h3><b class="trn text-center">Description</b></h3>
+                                                                                    </th>
+                                                                            <th scope="col">
+                                                                                <h3><b class="trn text-center">selected</b></h3>
+                                                                            </th>
+                        
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_1</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_1</h4>
+                                                                            </td>
+                                                                            <td><span id="competence1" onclick="selectCompetence(1)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_2</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_2</h4>
+                                                                            </td>
+                                                                            <td><span id="competence2" onclick="selectCompetence(2)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_3</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_3</h4>
+                                                                            </td>
+                                                                            <td><span id="competence3" onclick="selectCompetence(3)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_4</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_4</h4>
+                                                                            </td>
+                                                                            <td><span id="competence4" onclick="selectCompetence(4)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_5</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_5</h4>
+                                                                            </td>
+                                                                            <td><span id="competence5" onclick="selectCompetence(5)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_6</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_6</h4>
+                                                                            </td>
+                                                                            <td><span id="competence6" onclick="selectCompetence(6)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_7</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_7</h4>
+                                                                            </td>
+                                                                            <td><span id="competence7" onclick="selectCompetence(7)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_8</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_8</h4>
+                                                                            </td>
+                                                                            <td><span id="competence8" onclick="selectCompetence(8)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_9</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_9</h4>
+                                                                            </td>
+                                                                            <td><span id="competence9" onclick="selectCompetence(9)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_10</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_10</h4>
+                                                                            </td>
+                                                                            <td><span id="competence10" onclick="selectCompetence(10)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_11</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_11</h4>
+                                                                            </td>
+                                                                            <td><span id="competence11" onclick="selectCompetence(11)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_12</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_12</h4>
+                                                                            </td>
+                                                                            <td><span id="competence12" onclick="selectCompetence(12)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_13</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_13</h4>
+                                                                            </td>
+                                                                            <td><span id="competence13" onclick="selectCompetence(13)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_14</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_14</h4>
+                                                                            </td>
+                                                                            <td><span id="competence14" onclick="selectCompetence(14)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_15</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_15</h4>
+                                                                            </td>
+                                                                            <td><span id="competence15" onclick="selectCompetence(15)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_16</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_16</h4>
+                                                                            </td>
+                                                                            <td><span id="competence16" onclick="selectCompetence(16)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_17</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_17</h4>
+                                                                            </td>
+                                                                            <td><span id="competence17" onclick="selectCompetence(17)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_18</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_18</h4>
+                                                                            </td>
+                                                                            <td><span id="competence18" onclick="selectCompetence(18)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_19</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_19</h4>
+                                                                            </td>
+                                                                            <td><span id="competence19" onclick="selectCompetence(19)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_20</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_20</h4>
+                                                                            </td>
+                                                                            <td><span id="competence20" onclick="selectCompetence(20)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_21</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_21</h4>
+                                                                            </td>
+                                                                            <td><span id="competence21" onclick="selectCompetence(21)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_22</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_22</h4>
+                                                                            </td>
+                                                                            <td><span id="competence22" onclick="selectCompetence(22)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_23</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_23</h4>
+                                                                            </td>
+                                                                            <td><span id="competence23" onclick="selectCompetence(23)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_24</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_24</h4>
+                                                                            </td>
+                                                                            <td><span id="competence24" onclick="selectCompetence(24)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_25</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_25</h4>
+                                                                            </td>
+                                                                            <td><span id="competence25" onclick="selectCompetence(25)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_26</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_26</h4>
+                                                                            </td>
+                                                                            <td><span id="competence26" onclick="selectCompetence(26)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_27</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_27</h4>
+                                                                            </td>
+                                                                            <td><span id="competence27" onclick="selectCompetence(27)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_28</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_28</h4>
+                                                                            </td>
+                                                                            <td><span id="competence28" onclick="selectCompetence(28)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_29</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_29</h4>
+                                                                            </td>
+                                                                            <td><span id="competence29" onclick="selectCompetence(29)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_30</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_30</h4>
+                                                                            </td>
+                                                                            <td><span id="competence30" onclick="selectCompetence(30)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_31</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_31</h4>
+                                                                            </td>
+                                                                            <td><span id="competence31" onclick="selectCompetence(31)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_32</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_32</h4>
+                                                                            </td>
+                                                                            <td><span id="competence32" onclick="selectCompetence(32)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_33</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_33</h4>
+                                                                            </td>
+                                                                            <td><span id="competence33" onclick="selectCompetence(33)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_34</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_34</h4>
+                                                                            </td>
+                                                                            <td><span id="competence34" onclick="selectCompetence(34)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_35</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_35</h4>
+                                                                            </td>
+                                                                            <td><span id="competence35" onclick="selectCompetence(35)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_36</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_36</h4>
+                                                                            </td>
+                                                                            <td><span id="competence36" onclick="selectCompetence(36)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_37</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_37</h4>
+                                                                            </td>
+                                                                            <td><span id="competence37" onclick="selectCompetence(37)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_38</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_38</h4>
+                                                                            </td>
+                                                                            <td><span id="competence38" onclick="selectCompetence(38)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <h4 class="trn text-center">Competence_39</h4>
+                                                                                    </td>
+                                                                            <td>
+                                                                                    <h4 class="trn text-center">Description_Competence_39</h4>
+                                                                            </td>
+                                                                            <td><span id="competence39" onclick="selectCompetence(39)"
+                                                                                    ></span></td>
+                                                                            
+                                                                        </tr>
+
+                        
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            </div>
+                                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
+
+
+                        <div class="column" id="resolvebox">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h1 class="text text-center trn">Resolve</h1>
+                                        <h4 class="m-b-15 d-block trn justifyText">TextoGRIT</h4>
+                                    </div>
+                                    <div class="col-lg-1">
+                                    </div>
+                                    <div id="infoTestGRIT">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <h2 class="trn text-center">BenchmarkGRIT</h2>
+                                                <div id="chartPieBenchmarkGRIT"></div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <h2 class="trn text-center">SampleGRIT</h2>
+                                                <div id="chartPieGroupGRIT"></div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <h2 class="trn text-center">GroupalGRIT</h2>
+                                                <div id="chartPieSampleGRIT"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                                <div class="col-lg-12">
+                                                    <h2 class="trn chartTittle">GroupGRIT</h2>
+                                                    <br>
+                                                    <div class="row">
+                                                        <div id="chartBarGRIT"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column" id="wearbox">
+                                <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h1 class="text text-center trn">Wear</h1>
+                                            </div>
+                                            <div class="col-lg-1">
+                                            </div>
+                                            <div id="infoTestWear">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <h2 class="trn chartTittle">generalWear</h2>
+                                                        <div id="chartPieGeneralWear"></div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                            <h2 class="trn chartTittle">sampleWear</h2>
+                                                        <div id="chartPieSampleWear"></div>
+                                                    </div>
+                                                </div>
+                                                <br><br>
+                                                <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <h2 class="trn chartTittle">GroupWear</h2>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <h3 class="trn chartTittle">highWear</h3>
+                                                                <h4 class="redText text-center" id="namesHighWear"></h4>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                    <h3 class="trn chartTittle">midWear</h3>
+                                                                    <h4 class="redText text-center" id="namesMidWear"></h4>
+                                                                </div>
+                                                                <div class="col-lg-4"><br><br><br><br>
+                                                                        <h4 class="trn">wearDesc</h4>
+                                                                    </div>
+                                                        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
+                        <div class="column" id="initialbox">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <img src="../resources/img/iconFootr.png" onclick="" class="light-logo" width="200">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <h2 class="trn">footr</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="../main/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../main/dist/js/jquery.ui.touch-punch-improved.js"></script>
+    <script src="../main/dist/js/jquery-ui.min.js"></script>
+    <script src="../main/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="../main/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../main/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="../main/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="../main/assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="../main/dist/js/waves.js"></script>
+    <!--Custom JavaScript -->
+    <script src="../main/dist/js/custom.min.js"></script>
+    <!-- this page js -->
+    <script src="../main/assets/libs/moment/min/moment.min.js"></script>
+    <script src="../main/assets/libs/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script src="../main/dist/js/pages/calendar/cal-init.js"></script>
+    <script src="../jquery.translate.js"></script>
+    <script type="text/javascript" src="../mainAdmin/main.js" charset="utf-8"></script>
+    <script src="../dictionary.js"></script>
+</body>
+
+</html>
