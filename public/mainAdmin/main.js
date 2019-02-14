@@ -931,20 +931,20 @@ function userInformation(pAnswers, pAttrition, pName, pRole, pleadershipComunica
     this.attrition = pAttrition;
     this.name = pName;
     this.role = pRole;
-    this.rleadershipComunicationScore = pleadershipComunicationScore;
-    this.rleadershipConfrontationsScore = pleadershipConfrontationsScore;
-    this.rleadershipDesitionMakingScote = pleadershipDesitionMakingScote;
+    this.rleadershipComunicationScore = pleadershipComunicationScore * 100;
+    this.rleadershipConfrontationsScore = pleadershipConfrontationsScore * 100;
+    this.rleadershipDesitionMakingScote = pleadershipDesitionMakingScote * 100;
     this.rleadershipProfile = pleadershipProfile;
-    this.rleadershipleadershipScore = pleadershipleadershipScore;
-    this.rleadershipLeedrScore = pleadershipLeedrScore;
-    this.rleadershipTeamScore = pleadershipTeamScore;
-    this.reqselfAwarnesscore = peqselfAwarnesscore;
-    this.reqselfManagmentScore = peqselfManagmentScore;
-    this.reqSocialAwarnessScore = peqSocialAwarnessScore;
-    this.reqSocialManagmentScore = peqSocialManagmentScore;
+    this.rleadershipleadershipScore = pleadershipleadershipScore * 100;
+    this.rleadershipLeedrScore = pleadershipLeedrScore * 100;
+    this.rleadershipTeamScore = pleadershipTeamScore * 100;
+    this.reqselfAwarnesscore = peqselfAwarnesscore * 100;
+    this.reqselfManagmentScore = peqselfManagmentScore * 100;
+    this.reqSocialAwarnessScore = peqSocialAwarnessScore * 100;
+    this.reqSocialManagmentScore = peqSocialManagmentScore*100;
     this.reqProfile = peqProfile;
     this.riqAnswers = piqAnswersArray
-    this.rgritScore = pgritScore;
+    this.rgritScore = pgritScore * 100;
 
 }
 function loadUserInfo(uid, fn) {
@@ -1010,7 +1010,7 @@ function loadUserInfo(uid, fn) {
 
                                             iqDocRef.get().then(function (doc) {
                                                 if (doc.exists) {
-                                                    aiqAnswers = IQHas = [doc.data().being_strategic_correct, doc.data().business_instinct_correct, doc.data().buisness_inventivness_correct, doc.data().innovation_understanding_correct, doc.data().one_time_desition_making_correct, doc.data().problem_solving_correct, doc.data().understands_diversity_correct];
+                                                    aiqAnswers = [doc.data().being_strategic_correct, doc.data().business_instinct_correct, doc.data().buisness_inventivness_correct, doc.data().innovation_understanding_correct, doc.data().one_time_desition_making_correct, doc.data().problem_solving_correct, doc.data().understands_diversity_correct];
                                                     var tempUser = new userInformation(answers, attrition, name, role, aleadershipComunicationScore, aleadershipConfrontationsScore, aleadershipDesitionMakingScote, aleadershipProfile, aleadershipleadershipScore, aleadershipLeedrScore, aleadershipTeamScore, aeqselfAwarnesscore, aeqselfManagmentScore, aeqSocialAwarnessScore, aeqSocialManagmentScore, aeqProfile, aiqAnswers, agritScore);
                                                     usersInformation.push(tempUser);
                                                     companySize = companySize - 1;
@@ -1714,40 +1714,74 @@ function checkNumberOfSelectedCompetences() {
     return totalSelected;
 }
 
-function showDataUser(user) {
-    $('#competenciesTopBot3').show();
-    chartSpiderLeadership.dataProvider = setChartDataSampleLeadershipSpider([10, 10, 10, 10, 10, 10]);
-    chartSpiderLeadership.validateData();
-    chartClusterEQ.dataProvider = setChartSampleClusterEQData([10, 10, 10, 10]);
-    chartClusterEQ.validateData();
-    //console.log(chartSample);
-    sampleGritValue = 10;
-    chartSample.arrows[0].setValue(10);
-    chartSample.axes[0].setBottomText(10 + "%");
-    chartSample.validateData();
-    chartSample.validateNow();
-    chartWearSample.arrows[0].setValue(10);
-    chartWearSample.axes[0].setBottomText(10 + "%");
-    chartWearSample.validateData();
-    chartWearSample.validateNow();
-    iqHass = [true, true, false, false, true, false, true]
-    for (i = 0; i < iqHass.length; i++) {
-        if (iqHass[i]) {
-            document.getElementById("Iq" + (i + 1) + "Has").classList.add('dotChecked');
-            document.getElementById("Iq" + (i + 1) + "Hasnt").classList.add('dotUnchecked');
-        } else {
-            document.getElementById("Iq" + (i + 1) + "Hasnt").classList.add('dotChecked');
-            document.getElementById("Iq" + (i + 1) + "Has").classList.add('dotUnchecked');
-        }
+function showDataUser(selectedItem) {
+    if(groupsName.includes(selectedItem)){
+        var roleSize = 0;
+        var gLeadershipLeedrScore = 0;
+        var gleadershipComunicationScore = 0;
+        var gleadershipleadershipScore = 0;
+        var gleadershipDesitionMakingScote = 0;
+        var gleadershipConfrontationsScore = 0;
+        var gleadershipTeamScore = 0;
+        for(iworker in usersInfo){
+            var tempUser = usersInfo[iworker];
+            if((tempUser.role) == selectedItem){
+                roleSize = roleSize +1;
+                gLeadershipLeedrScore = gLeadershipLeedrScore + tempUser.rleadershipLeedrScore;
+                gleadershipComunicationScore = gleadershipComunicationScore + tempUser.rleadershipComunicationScore;
+                gleadershipleadershipScore = gleadershipleadershipScore +tempUser.rleadershipleadershipScore;
+                gleadershipDesitionMakingScote = gleadershipDesitionMakingScote +tempUser.rleadershipDesitionMakingScote;
+                gleadershipTeamScore = gleadershipTeamScore + tempUser.rleadershipTeamScore;
+                gleadershipConfrontationsScore = gleadershipConfrontationsScore + tempUser.rleadershipConfrontationsScore;
+            }
+            }
+        gLeadershipLeedrScore = gLeadershipLeedrScore / roleSize;
+        gleadershipComunicationScore = gleadershipComunicationScore / roleSize;
+        gleadershipleadershipScore = gleadershipleadershipScore / roleSize;
+        gleadershipDesitionMakingScote = gleadershipDesitionMakingScote/roleSize;
+        gleadershipTeamScore = gleadershipTeamScore/roleSize;
+        gleadershipConfrontationsScore = gleadershipConfrontationsScore/roleSize;
+        $('#competenciesTopBot3').show();
+        chartSpiderLeadership.dataProvider = setChartDataSampleLeadershipSpider([gLeadershipLeedrScore, gleadershipComunicationScore, gleadershipleadershipScore, gleadershipDesitionMakingScote, gleadershipConfrontationsScore, gleadershipTeamScore]);
+        chartSpiderLeadership.validateData();
+
+
     }
-    setPercentage(10);
-    document.getElementById("progressUser").innerHTML = user.replace("_", " ");
-    document.getElementById("userSelectedIQ").innerHTML = user.replace("_", " ");
-    setTextsJob(["loremIpsum", "loremIpsumShort", "loremIpsum"], ["loremIpsum", "loremIpsumShort", "loremIpsumShort"]);
-
+    else{
+        var selectedUser = usersInfo[usersName.indexOf(selectedItem.replace("_", " "))];
+        $('#competenciesTopBot3').show();
+        chartSpiderLeadership.dataProvider = setChartDataSampleLeadershipSpider([selectedUser.rleadershipLeedrScore, selectedUser.rleadershipComunicationScore, selectedUser.rleadershipleadershipScore, selectedUser.rleadershipDesitionMakingScote, selectedUser.rleadershipConfrontationsScore, selectedUser.rleadershipTeamScore]);
+        chartSpiderLeadership.validateData();
+        chartClusterEQ.dataProvider = setChartSampleClusterEQData([selectedUser.reqselfAwarnesscore, selectedUser.reqselfManagmentScore, selectedUser.reqSocialAwarnessScore, selectedUser.reqSocialManagmentScore]);
+        chartClusterEQ.validateData();
+        //sampleGritValue = selectedUser.rgritScore;
+        chartSample.arrows[0].setValue(selectedUser.rgritScore);
+        chartSample.axes[0].setBottomText(selectedUser.rgritScore + "%");
+        chartSample.validateData();
+        chartSample.validateNow();
+        //atrition
+        chartWearSample.arrows[0].setValue(selectedUser.attrition * 100);
+        chartWearSample.axes[0].setBottomText(selectedUser.attrition * 100 + "%");
+        chartWearSample.validateData();
+        chartWearSample.validateNow();
+        //iq
+        var iqHass = selectedUser.riqAnswers;
+        for (i = 0; i < iqHass.length; i++) {
+            if (iqHass[i]) {
+                document.getElementById("Iq" + (i + 1) + "Has").classList.add('dotChecked');
+                document.getElementById("Iq" + (i + 1) + "Hasnt").classList.add('dotUnchecked');
+            } else {
+                document.getElementById("Iq" + (i + 1) + "Hasnt").classList.add('dotChecked');
+                document.getElementById("Iq" + (i + 1) + "Has").classList.add('dotUnchecked');
+            }
+        }
+        //fitness
+        setPercentage(100);
+        document.getElementById("progressUser").innerHTML = selectedItem.replace("_", " ");
+        document.getElementById("userSelectedIQ").innerHTML = selectedItem.replace("_", " ");
+        setTextsJob(["loremIpsum", "loremIpsumShort", "loremIpsum"], ["loremIpsum", "loremIpsumShort", "loremIpsumShort"]);
+    }
 }
-
-
 // what happens when tabs are clicked
 $(function () {
 

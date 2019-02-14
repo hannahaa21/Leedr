@@ -836,7 +836,7 @@ function loadUserInfo(uid, fn) {
                                         leadershipDescription = doc.data().leadership_profile_description;
                                         leadershipPrincipal = doc.data().primary_trait;
                                         leadershipSecondary = doc.data().secondary_trait;
-                                        leadershipLeedrScore = doc.data().team_score * 100;
+                                        leadershipLeedrScore = doc.data().leedr_score * 100;
                                         leadershipCommunicationScore = doc.data().communication_score * 100;
                                         leadershipLeadershipScore = doc.data().leadership_score * 100;
                                         leadershipDecitionScore = doc.data().desition_making_score * 100;
