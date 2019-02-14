@@ -1,5 +1,6 @@
-let actualQuestion = 1;
-let arrayIndex = 0;
+let actualQuestion = 30;
+let arrayIndex = 29;
+let preguntaPorcentaje = 30;
 let answers = [];
 let language = localStorage.getItem("language");;
 var userInfo;
@@ -1114,7 +1115,7 @@ function checkLoggedin() {
 // 3 - Ordenar 5 preguntas
 // 4 - No existe
 function questionType(question) {
-
+    
     if (question <= 39 || question === 50 || question === 51 || (question >= 53 && question <= 57) || question === 60) {
         return 1;
     } else if (question === 46 || question === 48 || question === 49) {
@@ -1134,11 +1135,13 @@ function setFirstQuestion() {
 function setPercentageBar(percentage){
     $('#progressBar').attr('aria-valuenow', percentage).css('width', percentage+"%");
     document.getElementById("progressBar").innerHTML = percentage+"%";
-    document.getElementById("preguntaActual").innerHTML= (actualQuestion)+"/65"
+    document.getElementById("preguntaActual").innerHTML= (preguntaPorcentaje)+"/64"
 }
 function nextQuestion() {
+    
     let questionType1 = questionType(actualQuestion);
     if (actualQuestion < 65) {
+        preguntaPorcentaje++;
         if (questionType1 === 1) {
             if ($('input[name=radio]:checked').val() == undefined) {
                 window.alert("Please answer the question");
@@ -1181,10 +1184,11 @@ function nextQuestion() {
                 if (questionType(actualQuestion) != 4)
                     break
             }
+            preguntaPorcentaje--
         }
         questionType1 = questionType(actualQuestion);
         interfaceQuestionTypeShow(questionType1);
-        setPercentageBar(Math.round((actualQuestion/65)*100));
+        setPercentageBar(Math.round((preguntaPorcentaje/65)*100));
     } else {
         if (actualQuestion === 65)
         {
@@ -1252,6 +1256,7 @@ function interfaceQuestionTypeShow(question) {
 
 function previousQuestion() {
     if (actualQuestion > 1) {
+        preguntaPorcentaje--;
         arrayIndex--;
         answers.pop();
         actualQuestion--;
@@ -1261,7 +1266,7 @@ function previousQuestion() {
             actualQuestion--;
         }
         interfaceQuestionTypeShow(questionType(actualQuestion));
-        setPercentageBar(Math.round((actualQuestion/65)*100));
+        setPercentageBar(Math.round((preguntaPorcentaje/65)*100));
     }
 }
 
