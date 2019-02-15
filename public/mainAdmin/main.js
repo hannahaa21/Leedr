@@ -959,6 +959,7 @@ function loadUserInfo(uid, fn) {
                 var usersInformation = [];
                 var companySize = querySnapshot.size;
                 querySnapshot.forEach(function (doc) {
+                    console.log(companySize);
                     var answers;
                     var attrition;
                     var name;
@@ -981,6 +982,7 @@ function loadUserInfo(uid, fn) {
                     answers = doc.data().Answers;
                     attrition = doc.data().individual_attrition;
                     name = String(doc.data().name + " " + doc.data().last_name);
+                    console.log(name);
                     role = doc.data().role;
                     var leadershipDocRed = firebase.firestore().collection("users-b2c").doc(doc.id).collection("Scores").doc("leadership_scores");
                     var gritDocRed = firebase.firestore().collection("users-b2c").doc(doc.id).collection("Scores").doc("grit_scores");
@@ -1014,8 +1016,8 @@ function loadUserInfo(uid, fn) {
                                                     var tempUser = new userInformation(answers, attrition, name, role, aleadershipComunicationScore, aleadershipConfrontationsScore, aleadershipDesitionMakingScote, aleadershipProfile, aleadershipleadershipScore, aleadershipLeedrScore, aleadershipTeamScore, aeqselfAwarnesscore, aeqselfManagmentScore, aeqSocialAwarnessScore, aeqSocialManagmentScore, aeqProfile, aiqAnswers, agritScore);
                                                     usersInformation.push(tempUser);
                                                     companySize = companySize - 1;
+                                                    console.log("hola answer " +  companySize);
                                                     if(companySize === 0){
-                                                        console.log(companySize);
                                                         fn(usersInformation);
                                                     }
                                                 } else {
@@ -1039,6 +1041,7 @@ function loadUserInfo(uid, fn) {
                         } else {
                             //No ha respondido las preguntas 
                             companySize = companySize - 1;
+                            console.log("hola no answer" + companySize);
                             //TODO: PREGUNTARLE A ANDRES QUE HACER
 
                         }
