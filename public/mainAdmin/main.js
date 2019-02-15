@@ -959,7 +959,7 @@ function loadUserInfo(uid, fn) {
                 var usersInformation = [];
                 var companySize = querySnapshot.size;
                 querySnapshot.forEach(function (doc) {
-                    console.log(companySize);
+                    //console.log(companySize);
                     var answers;
                     var attrition;
                     var name;
@@ -1640,8 +1640,7 @@ function loadUsersAndGroups()
 {
     users.forEach(function (user) {
     name = user;
-    name = user.replace(" ", "_");
-    name = user.replace(" ", "_");
+    name = name.replace(/ /g, "_");
     $('#users').append('<div class="user" id="' + name + '">');
     $('#' + name).append('<a onclick="showDataUser(\'' + name + '\')">' +
         '<span class="name">' + user + '</span>' + '</a>' + '</div>');
