@@ -1,6 +1,6 @@
-let actualQuestion = 30;
-let arrayIndex = 29;
-let preguntaPorcentaje = 30;
+let actualQuestion = 1;
+let arrayIndex = 0;
+let preguntaPorcentaje = 0;
 let answers = [];
 let language = localStorage.getItem("language");;
 var userInfo;
