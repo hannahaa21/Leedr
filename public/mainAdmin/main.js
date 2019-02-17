@@ -1640,11 +1640,13 @@ function loadUsersAndGroups()
 {
     users.forEach(function (user) {
     name = user;
+    name = name.replace(" ", "_");
+    name = user.replace(" ", "_");
     name = user.replace(" ", "_");
     name = user.replace(" ", "_");
     $('#users').append('<div class="user" id="' + name + '">');
     $('#' + name).append('<a onclick="showDataUser(\'' + name + '\')">' +
-        '<span class="name">' + user + '</span>' + '</a>' + '</div>');
+        '<span class="name">' + name + '</span>' + '</a>' + '</div>');
 });
 
 groups.forEach(function (group) {
