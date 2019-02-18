@@ -849,7 +849,6 @@ function loadUserInfo(uid, fn) {
                                                 IQsuggestionTwo = doc.data().suggestion_two;
                                                 IQsuggestionThree = doc.data().suggestion_three;
                                                 IQHas = [doc.data().being_strategic_correct, doc.data().business_instinct_correct, doc.data().buisness_inventivness_correct, doc.data().innovation_understanding_correct, doc.data().one_time_desition_making_correct, doc.data().problem_solving_correct, doc.data().understands_diversity_correct];
-
                                                 docRefJob.get().then(function (doc) {
                                                     if (doc.exists) {
                                                         jobFitnessResults = doc.data().job_fitness_answers;
@@ -878,7 +877,6 @@ function loadUserInfo(uid, fn) {
                                                             quickWins[j] = temp; 
                                                         }
                                                         setTextJobFit(quickWins, jobFitnessResults, percentage)
-
                                                         fn(cuUser, true);
                                                     } else {
                                                         // doc.data() will be undefined in this case

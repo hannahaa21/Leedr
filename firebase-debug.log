@@ -1,0 +1,31 @@
+[debug] [2019-02-18T20:03:36.500Z] ----------------------------------------------------------------------
+[debug] [2019-02-18T20:03:36.505Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Usuario\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2019-02-18T20:03:36.505Z] CLI Version:   6.3.1
+[debug] [2019-02-18T20:03:36.506Z] Platform:      win32
+[debug] [2019-02-18T20:03:36.506Z] Node Version:  v11.6.0
+[debug] [2019-02-18T20:03:36.507Z] Time:          Mon Feb 18 2019 15:03:36 GMT-0500 (Colombia Standard Time)
+[debug] [2019-02-18T20:03:36.507Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-02-18T20:03:36.519Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-02-18T20:03:36.520Z] > authorizing via signed-in user
+[debug] [2019-02-18T20:03:36.520Z] [iam] checking project leedr-devapp for permissions ["firebase.projects.get"]
+[debug] [2019-02-18T20:03:36.522Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/leedr-devapp:testIamPermissions  
+
+[debug] [2019-02-18T20:03:37.144Z] <<< HTTP RESPONSE 200
+[debug] [2019-02-18T20:03:37.148Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/leedr-devapp  
+ 
+[debug] [2019-02-18T20:03:37.642Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\Usuario\Documents\Leedr\Leedr\Leedr'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2019-02-18T20:03:38.959Z] Fetching environment
+[debug] [2019-02-18T20:03:38.966Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/631376229434:getServerAppConfig  
+ 
+[debug] [2019-02-18T20:03:38.968Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/631376229434/clients/_:getWebAppConfig  
+ 
+[debug] [2019-02-18T20:03:39.495Z] <<< HTTP RESPONSE 200
+[debug] [2019-02-18T20:03:39.497Z] Starting @google-cloud/functions-emulator
+[debug] [2019-02-18T20:03:39.743Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] +  hosting: Local server: http://localhost:5000

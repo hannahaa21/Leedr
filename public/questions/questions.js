@@ -1,4 +1,4 @@
-let actualQuestion = 1;
+  let actualQuestion = 1;
 let arrayIndex = 0;
 let preguntaPorcentaje = 0;
 let answers = [];
@@ -126,7 +126,7 @@ function saveAnswersAndResults(answers){
     var docRefleadership = docRef.collection("Scores").doc("leadership_scores");
     var docRefIQ = docRef.collection("Scores").doc("iq_scores");
     var docRefJob = docRef.collection("Scores").doc("job_scores");
-    individualAttrition = (1 - ((leadershipResults[9] * 0.1) + (leadershipResults[5] * 0.15) + (eqResults[5] * 0.15 + (gritResults[1] * 0.2) + (eqResults[1] * 0.1) + (gritResults[3] * 0.15) + (0.15 / gritResults[3]))));
+    individualAttrition = ( ((leadershipResults[9] * 0.1) + (leadershipResults[5] * 0.15) + (eqResults[5] * 0.15 + (gritResults[1] * 0.2) + (eqResults[1] * 0.1) + (gritResults[3] * 0.15) + (0.15 / gritResults[2]))));
     
     docRefJob.set({
         job_fitness_answers: jobResults
@@ -1056,7 +1056,7 @@ function calculateGrid(gritAnswers){
         results[5] = "GRITPersonal_61-74";
     }
     else if (results[1] <= 0.85) {
-        results[5] = "GRITPersonal_75-86";
+        results[5] = "GRITPersonal_75-85";
     }
     else{
         results[5] = "GRITPersonal_86-100";
